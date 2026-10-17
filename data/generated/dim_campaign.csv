@@ -1,0 +1,11 @@
+campaign_id,campaign_name,platform,traffic_type,default_utm_medium
+META_PROS_01,Meta Prospecting,meta,Paid,paid_social
+META_RET_02,Meta Retargeting,meta,Paid,paid_social
+META_SEAS_03,Meta Seasonal Promo,meta,Paid,paid_social
+GOOG_BRAND_01,Google Brand Search,google,Paid,cpc
+GOOG_PMAX_02,Google Shopping PMax,google,Paid,cpc
+ORG_DIRECT,Direct / Organic,direct,Organic,(none)
+ORG_IG,Instagram Organic,instagram,Organic,organic_social
+ORG_FB,Facebook Organic,facebook,Organic,organic_social
+ORG_GG,Google Organic SEO,google,Organic,organic
+INT_DRAFT,Internal Draft Orders,internal,Internal,internal
