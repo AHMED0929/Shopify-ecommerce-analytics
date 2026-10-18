@@ -11,7 +11,7 @@ flowchart LR
     B --> M["Metabase OSS v0.64<br/>12 SQL questions + KPI strip → 3 dashboards"]
 ```
 
-**Skills demonstrated:** BI tool portability, BigQuery SQL, Metabase (OSS) administration, REST API deployment scripts, and cohort, funnel, and financial reconciliation analysis.
+**Skills demonstrated:** BI tool portability, BigQuery SQL, Metabase (OSS), REST API deployment scripts, and cohort, funnel, and financial reconciliation analysis.
 
 ---
 
@@ -77,9 +77,9 @@ Because both Power BI and Metabase query the same four views in `../sql/views.sq
 | GA4 Funnel (Sessions → Purchase Sessions) | `1,327,199 → 11,133` (step rates: `31.5% → 10.8% → 52.8% → 46.6%`) |
 | Net Revenue by Channel (Internal / Organic / Paid) | `$232,459.32 / $4,312,575.76 / $1,636,464.21` |
 
-### Metabase v0.64 Implementation Notes
+### Metabase Implementation Notes
 
-1. **SQL-pivoted cohort table:** Metabase v0.64's native Pivot Table enforces a minimum column width that clips Months 10–12 on a single screen. Pivoting `month_0` through `month_12` directly in SQL and applying conditional formatting to a standard table keeps all 13 columns visible without horizontal scrolling.
+1. **SQL-pivoted cohort table:** Metabase's native Pivot Table enforces a minimum column width that clips Months 10–12 on a single screen. Pivoting `month_0` through `month_12` directly in SQL and applying conditional formatting to a standard table keeps all 13 columns visible without horizontal scrolling.
 2. **SQL `Total` rows:** Standard tables in Metabase do not automatically render a grand total footer, so `09_order_status_walk.sql` and `12_channel_walk.sql` append a `UNION ALL` summary row in SQL.
 3. **Series labels:** Line and bar chart legend names are set via SQL column aliases so they render cleanly without manual UI overrides.
 
@@ -90,17 +90,8 @@ Because both Power BI and Metabase query the same four views in `../sql/views.sq
 | Path | Description |
 | --- | --- |
 | `questions/` | The 12 BigQuery SQL queries (plus `kpi/` scalar queries) |
-| `automation/deploy_suite.py` | Python script that deploys all questions, cards, and dashboard layouts via the Metabase REST API and checks the returned values |
+| `automation/deploy_suite.py` | Python script that deploys the questions, cards, and dashboard layouts via the Metabase REST API |
 | `dashboard-spec.md` | Grid coordinates and chart settings for all 3 dashboards |
-| `setup.md` | Local setup guide: Java 21, Metabase OSS JAR, and read-only BigQuery service account configuration |
 | `assets/` | Dashboard screenshots shown above |
-
-*Note: No credentials or service-account keys are stored in this repository. Environment variables and external key paths are documented in `setup.md`.*
-
-## 🔁 How to Run Locally
-
-1. Follow Steps 1–4 in `setup.md` to start Metabase OSS on `localhost:3000` and connect a read-only BigQuery service account.
-2. Run `python automation/deploy_suite.py` to create the questions and dashboards via the Metabase API.
-3. Open `http://localhost:3000` and view Dashboards **2** (Executive), **3** (Retention), and **4** (Reconciliation Audit).
 
 *Part of the [Shopify-ecommerce-analytics](https://github.com/AHMED0929/Shopify-ecommerce-analytics) portfolio — same warehouse, same numbers, different BI tool.*
