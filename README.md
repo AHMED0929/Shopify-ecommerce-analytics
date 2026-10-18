@@ -165,11 +165,3 @@ Everything *not* listed below (order counts, prices, dates, statuses, refunds, S
 | `metabase/` | The same warehouse in **Metabase OSS** — 12 hand-written BigQuery SQL questions + 3 dashboards + one-command API deploy (see `metabase/README.md`) |
 
 ---
-
-## 🔁 Reproduce the pipeline
-
-1. `pip install pandas numpy`
-2. Point `SHOPIFY_CSV` in `generate_funnel.py` at your copy of the synthetic Shopify export (the repo copy lives at `data/shopify_mock_orders_improved.csv`).
-3. Run `python generate_funnel.py` — the console prints the reconciliation line, e.g.
-   `GMV=6,252,668.43 spend=1,488,730.67 MER=4.20 scale=1.08 … blended_CPA=127.05 blended_CAC=299.42 … net_revenue=6,181,499.29`.
-4. Load the six generated CSVs into BigQuery as dataset `full_funnel` (create table → upload, schema auto-detect), then run `sql/views.sql` to create the four `vw_*` views. Open `Full_Funnel_Commerce_Intelligence.pbix` — if you use a different project ID, update the BigQuery source.
