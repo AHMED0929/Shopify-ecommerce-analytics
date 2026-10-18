@@ -162,6 +162,7 @@ Everything *not* listed below (order counts, prices, dates, statuses, refunds, S
 | `data/shopify_mock_orders_improved.csv` | Synthetic Shopify export — the pipeline's source CSV |
 | `full_funnel_theme.json` | Power BI theme (bundled inside the `.pbix`) |
 | `assets/` | The three dashboard screenshots used above |
+| `metabase/` | The same warehouse in **Metabase OSS** — 12 hand-written BigQuery SQL questions + 3 dashboards + one-command API deploy (see `metabase/README.md`) |
 
 ---
 
