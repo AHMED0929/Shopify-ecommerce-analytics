@@ -146,11 +146,13 @@ The same four curated views are deliberately served through three platforms, so 
 | **Metabase OSS v0.64** | 12 SQL questions + 6-tile KPI strip → 3 dashboards · REST-API deploy | [`metabase/README.md`](metabase/README.md) |
 | **Looker Studio** | 8 BigQuery data sources (4 views + 4 custom queries) → 1 Executive page | [`looker/README.md`](looker/README.md) |
 
-### Looker Studio Executive
+### Tool previews
 
-![Looker Studio Executive dashboard — six KPI scorecards, session funnel, three-way reconciliation, 24-month trend, channel split, tier mix, campaign unit economics, order-status walk](looker/assets/looker_executive_full_page.png)
+| **Metabase OSS** — 3 dashboards | **Looker Studio** — 1 Executive page |
+| --- | --- |
+| ![Metabase Executive dashboard — KPI strip, session funnel, three-way reconciliation, campaign economics, monthly trend](metabase/assets/dashboard1_executive.png) | ![Looker Studio Executive dashboard — six KPI scorecards, session funnel, three-way reconciliation, 24-month trend, channel split, tier mix, campaign unit economics, order-status walk](looker/assets/looker_executive_full_page.png) |
 
-*Six KPI scorecards + seven visuals on the same `vw_*` views; direct BigQuery connection, no extracts or blends. Every value matches the warehouse gates — see the [parity table and paste-ready SQL](looker/README.md).*
+*Both read the same four `vw_*` views, and every value matches the warehouse gates. Metabase adds 12 hand-written SQL questions across three dashboards; Looker Studio rebuilds the Executive page from eight BigQuery sources (direct query, no extracts or blends). Docs: [Metabase](metabase/README.md) · [Looker Studio](looker/README.md).*
 
 ---
 
