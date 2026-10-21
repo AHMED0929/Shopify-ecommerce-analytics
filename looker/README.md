@@ -119,5 +119,3 @@ The status-walk gross total (`$6,385,333.39`) sums **all 12,000 orders**, so it 
 | `sql/` | The four paste-ready custom queries (DS5–DS8) |
 | `assets/looker_executive_full_page.png` | Full-page render (1830 × 3023) |
 | `README.md` | This file |
-
- tools.*
