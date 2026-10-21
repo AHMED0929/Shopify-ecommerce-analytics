@@ -1,6 +1,6 @@
-# Full-Funnel Commerce Intelligence — Shopify × GA4 × Meta (BigQuery → Power BI)
+# Full-Funnel Commerce Intelligence — Shopify × GA4 × Meta (BigQuery → Power BI · Metabase · Looker Studio)
 
-A 3-page Power BI flagship built on a BigQuery warehouse: acquisition funnel, retention & cohort LTV, and a 3-way attribution reconciliation — across 24 months, 12,000 orders and $6.25M gross merchandise value.
+A 3-page Power BI flagship built on a BigQuery warehouse: acquisition funnel, retention & cohort LTV, and a 3-way attribution reconciliation — across 24 months, 12,000 orders and $6.25M gross merchandise value. The same four curated views are ported to **Metabase OSS** and **Looker Studio**, so every headline number is reproducible across three BI tools.
 
 > ### ⚠️ Data disclosure — synthetic demonstration data
 > This is a **self-directed portfolio project**. It contains **no real customer data** and is **not client work**.
@@ -8,7 +8,7 @@ A 3-page Power BI flagship built on a BigQuery warehouse: acquisition funnel, re
 > - The **GA4 funnel and Meta/Google ad-spend layers are simulated** by a seeded generator (`generate_funnel.py`) anchored to those orders — they are not exports from live GA4 or ad accounts, and this project contains **no tracking/tag implementation**.
 > - Every invented parameter is documented in the [Synthetic parameter inventory](#-synthetic-parameter-inventory). All published revenue figures are exact sums of the dataset; only the funnel/spend model inputs are made up.
 
-**Skills demonstrated:** dimensional modeling · BigQuery SQL · Power BI / DAX / Power Query · Python (pandas, NumPy) · funnel & cohort analysis · cross-platform metric reconciliation.
+**Skills demonstrated:** dimensional modeling · BigQuery SQL · Power BI / DAX / Power Query · Metabase OSS · Looker Studio · Python (pandas, NumPy) · funnel & cohort analysis · cross-platform metric reconciliation.
 
 ---
 
@@ -41,9 +41,11 @@ flowchart LR
     G -->|"simulated GA4 funnel + ad spend"| B
     B --> P["Power BI semantic model<br/>star schema · DAX · 3 measure folders"]
     P --> D["3-page flagship dashboard"]
+    B --> M["Metabase OSS v0.64<br/>12 SQL questions → 3 dashboards"]
+    B --> L["Looker Studio<br/>8 BigQuery sources → 1 Executive page"]
 ```
 
-**Pipeline at a glance:** the Shopify export is split into order-header and line-item grains → the generator layers campaign attribution, a simulated GA4 session funnel and simulated paid-media spend → everything lands in BigQuery as 6 tables + 4 views → Power BI reads the curated views and serves the 3-page report.
+**Pipeline at a glance:** the Shopify export is split into order-header and line-item grains → the generator layers campaign attribution, a simulated GA4 session funnel and simulated paid-media spend → everything lands in BigQuery as 6 tables + 4 views → Power BI reads the curated views through a semantic model, while Metabase and Looker Studio query the same views directly. Three BI tools, one metric contract.
 
 ---
 
@@ -134,6 +136,24 @@ Everything *not* listed below (order counts, prices, dates, statuses, refunds, S
 
 ---
 
+## 🖥️ Three BI tools, one warehouse
+
+The same four curated views are deliberately served through three platforms, so the metric contracts are proven independent of any one BI tool:
+
+| Tool | Build | Documentation |
+| --- | --- | --- |
+| **Power BI** (flagship) | 3-page report · star schema · DAX measure folders | this page |
+| **Metabase OSS v0.64** | 12 SQL questions + 6-tile KPI strip → 3 dashboards · REST-API deploy | [`metabase/README.md`](metabase/README.md) |
+| **Looker Studio** | 8 BigQuery data sources (4 views + 4 custom queries) → 1 Executive page | [`looker/README.md`](looker/README.md) |
+
+### Looker Studio Executive
+
+![Looker Studio Executive dashboard — six KPI scorecards, session funnel, three-way reconciliation, 24-month trend, channel split, tier mix, campaign unit economics, order-status walk](looker/assets/looker_executive_full_page.png)
+
+*Six KPI scorecards + seven visuals on the same `vw_*` views; direct BigQuery connection, no extracts or blends. Every value matches the warehouse gates — see the [parity table and paste-ready SQL](looker/README.md).*
+
+---
+
 ## 🧮 Metric definitions
 
 | Metric | Definition |
@@ -163,5 +183,4 @@ Everything *not* listed below (order counts, prices, dates, statuses, refunds, S
 | `full_funnel_theme.json` | Power BI theme (bundled inside the `.pbix`) |
 | `assets/` | The three dashboard screenshots used above |
 | `metabase/` | The same warehouse in **Metabase OSS** — 12 hand-written BigQuery SQL questions + 3 dashboards + one-command API deploy (see `metabase/README.md`) |
-
----
+| `looker/` | The same warehouse in **Looker Studio** — 8 BigQuery data sources (4 curated views + 4 custom SQL queries), one Executive page, plus the four paste-ready queries and a value-by-value parity table (see `looker/README.md`) |
