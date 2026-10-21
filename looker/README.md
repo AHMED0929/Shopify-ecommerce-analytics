@@ -120,16 +120,4 @@ The status-walk gross total (`$6,385,333.39`) sums **all 12,000 orders**, so it 
 | `assets/looker_executive_full_page.png` | Full-page render (1830 × 3023) |
 | `README.md` | This file |
 
----
-
-## 🔁 Reproduce
-
-1. Build the warehouse from the repo root: load the six generated CSVs as BigQuery tables, then run `../sql/views.sql` to create the four `vw_*` views.
-2. In Looker Studio: **Create → Report → Add data → BigQuery**, authorize, pick project `ecommerce-bi-analytics` and dataset `full_funnel`.
-3. Add DS1–DS4 by selecting the four views.
-4. Add DS5–DS8 via **Custom query**, pasting each file from `sql/`.
-5. Apply the renames, formats and calculated fields listed above.
-6. Build the page: six scorecards (DS1), funnel (DS5), recon bars (DS6), monthly time series (DS2), channel bars (DS3), tier donut (DS4), campaign table (DS7), status walk (DS8). Set the four chart sorts, enable the status table summary row, and add the funnel/channel captions.
-7. Verify every row of the parity table before publishing.
-
-*Part of the [Shopify-ecommerce-analytics](https://github.com/AHMED0929/Shopify-ecommerce-analytics) portfolio — same warehouse, same numbers, three BI tools.*
+ tools.*
